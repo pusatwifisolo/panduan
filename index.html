@@ -103,17 +103,38 @@
             margin-bottom: 0.8em;
             text-align: center;
         }
-        .guide-card ol {
-            padding-left: 1.5em;
+        .guide-list {
+            padding-left: 0;
+            list-style: none;
             font-size: 1em;
             line-height: 1.6;
         }
-        .guide-card li {
-            margin-bottom: 0.5em;
+        .guide-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.8em;
+            position: relative;
+            padding-left: 2em;
         }
-        .guide-card i {
+        .guide-icon {
+            margin-right: 0.8em;
             color: #3b82f6;
-            margin-right: 0.5em;
+            font-size: 1.1em;
+            width: 1.2em;
+            flex-shrink: 0;
+            margin-top: 0.1em;
+        }
+        .guide-text {
+            flex: 1;
+            line-height: 1.5;
+        }
+        .guide-text a {
+            color: #3b82f6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .guide-text a:hover {
+            color: #1e3a8a;
         }
         .btn {
             display: inline-block;
@@ -127,6 +148,8 @@
             transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             text-align: center;
+            width: 230px; /* Set width to match "Tanya Tentang Instalasi" */
+            box-sizing: border-box;
         }
         .btn:hover {
             transform: scale(1.15);
@@ -194,9 +217,9 @@
             from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes rotateIn {
-            from { opacity: 0; transform: rotate(-10deg) scale(0.8); }
-            to { opacity: 1; transform: rotate(0) scale(1); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(80px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         @keyframes subtlePulse {
             0% { opacity: 0.4; }
@@ -214,8 +237,27 @@
                 max-width: 100%;
             }
             .guide-card h2 { font-size: 1.5em; }
-            .guide-card ol { font-size: 0.9em; }
-            .btn { padding: 10px 20px; font-size: 0.9em; }
+            .guide-item {
+                display: flex;
+                align-items: flex-start;
+                padding-left: 1.5em;
+                margin-bottom: 0.8em;
+            }
+            .guide-icon {
+                margin-right: 0.6em;
+                margin-bottom: 0;
+                width: 1.2em;
+                font-size: 1em;
+            }
+            .guide-text {
+                margin-top: 0;
+                line-height: 1.4;
+            }
+            .btn { 
+                padding: 10px 20px; 
+                font-size: 0.9em; 
+                width: 210px; /* Adjusted for mobile */
+            }
             .whatsapp-float {
                 width: 51px;
                 height: 51px;
@@ -239,8 +281,23 @@
                 max-width: 100%;
             }
             .guide-card h2 { font-size: 1.3em; }
-            .guide-card ol { font-size: 0.8em; }
-            .btn { padding: 8px 15px; font-size: 0.8em; }
+            .guide-item {
+                padding-left: 1.2em;
+            }
+            .guide-icon {
+                margin-right: 0.5em;
+                font-size: 0.95em;
+                width: 1.1em;
+            }
+            .guide-text {
+                font-size: 0.9em;
+                line-height: 1.3;
+            }
+            .btn { 
+                padding: 8px 15px; 
+                font-size: 0.8em; 
+                width: 190px; /* Adjusted for smaller mobile */
+            }
             .whatsapp-float {
                 width: 46px;
                 height: 46px;
@@ -270,40 +327,85 @@
         <section class="guide-section">
             <div class="guide-card">
                 <h2>Proses Pendaftaran</h2>
-                <ol>
-                    <li><i class="fas fa-user-plus"></i> Hubungi kami melalui WhatsApp di <a href="#" onclick="redirectToContactWhatsApp()">0857 7777 3541</a> atau klik tombol WhatsApp di pojok kiri bawah.</li>
-                    <li><i class="fas fa-list"></i> Pilih paket yang sesuai dengan kebutuhan Anda (Basic, Standard, Premium, atau Platinum).</li>
-                    <li><i class="fas fa-file-alt"></i> Kirimkan data diri berupa nama, alamat lengkap, dan nomor telepon.</li>
-                    <li><i class="fas fa-check-circle"></i> Tim kami akan mengkonfirmasi pendaftaran dan menjadwalkan survey lokasi.</li>
-                    <li><i class="fas fa-money-check-alt"></i> Lakukan pembayaran awal sesuai paket yang dipilih melalui metode pembayaran yang tersedia.</li>
-                </ol>
-                <a href="#" class="btn" onclick="redirectToContactWhatsApp()">Daftar Sekarang</a>
+                <ul class="guide-list">
+                    <li class="guide-item">
+                        <i class="fas fa-user-plus guide-icon"></i>
+                        <span class="guide-text">Hubungi kami melalui WhatsApp di <a href="#" onclick="redirectToContactWhatsApp('register')">0857 7777 3541</a> atau klik tombol WhatsApp di pojok kiri bawah.</span>
+                    </li>
+                    <li class="guide-item">
+                        <i class="fas fa-list guide-icon"></i>
+                        <span class="guide-text">Pilih paket yang sesuai dengan kebutuhan Anda (Basic, Standard, Premium, atau Platinum).</span>
+                    </li>
+                    <li class="guide-item">
+                        <i class="fas fa-file-alt guide-icon"></i>
+                        <span class="guide-text">Kirimkan data diri berupa nama, alamat lengkap, dan nomor telepon.</span>
+                    </li>
+                    <li class="guide-item">
+                        <i class="fas fa-check-circle guide-icon"></i>
+                        <span class="guide-text">Tim kami akan mengkonfirmasi pendaftaran dan menjadwalkan survey lokasi.</span>
+                    </li>
+                    <li class="guide-item">
+                        <i class="fas fa-money-check-alt guide-icon"></i>
+                        <span class="guide-text">Lakukan pembayaran awal sesuai paket yang dipilih melalui metode pembayaran yang tersedia.</span>
+                    </li>
+                </ul>
+                <a href="#" class="btn" onclick="redirectToContactWhatsApp('register')">Daftar Sekarang</a>
             </div>
             <div class="guide-card">
                 <h2>Proses Instalasi</h2>
-                <ol>
-                    <li><i class="fas fa-map-marker-alt"></i> Tim teknisi kami akan melakukan survey lokasi untuk memastikan kelayakan jaringan.</li>
-                    <li><i class="fas fa-tools"></i> Setelah survey disetujui, instalasi akan dijadwalkan dalam waktu 1-3 hari kerja.</li>
-                    <li><i class="fas fa-wifi"></i> Teknisi akan memasang perangkat WiFi dan mengatur koneksi internet di lokasi Anda.</li>
-                    <li><i class="fas fa-cog"></i> Pengujian koneksi dilakukan untuk memastikan kecepatan dan stabilitas sesuai paket.</li>
-                    <li><i class="fas fa-thumbs-up"></i> Anda akan menerima panduan penggunaan dan informasi login WiFi.</li>
-                </ol>
-                <a href="#" class="btn" onclick="redirectToContactWhatsApp()">Tanya Tentang Instalasi</a>
+                <ul class="guide-list">
+                    <li class="guide-item">
+                        <i class="fas fa-map-marker-alt guide-icon"></i>
+                        <span class="guide-text">Tim teknisi kami akan melakukan survey lokasi untuk memastikan kelayakan jaringan.</span>
+                    </li>
+                    <li class="guide-item">
+                        <i class="fas fa-tools guide-icon"></i>
+                        <span class="guide-text">Setelah survey disetujui, instalasi akan dijadwalkan dalam waktu 1-3 hari kerja.</span>
+                    </li>
+                    <li class="guide-item">
+                        <i class="fas fa-wifi guide-icon"></i>
+                        <span class="guide-text">Teknisi akan memasang perangkat WiFi dan mengatur koneksi internet di lokasi Anda.</span>
+                    </li>
+                    <li class="guide-item">
+                        <i class="fas fa-cog guide-icon"></i>
+                        <span class="guide-text">Pengujian koneksi dilakukan untuk memastikan kecepatan dan stabilitas sesuai paket.</span>
+                    </li>
+                    <li class="guide-item">
+                        <i class="fas fa-thumbs-up guide-icon"></i>
+                        <span class="guide-text">Anda akan menerima panduan penggunaan dan informasi login WiFi.</span>
+                    </li>
+                </ul>
+                <a href="#" class="btn" onclick="redirectToContactWhatsApp('install')">Tanya Tentang Instalasi</a>
             </div>
             <div class="guide-card">
                 <h2>Panduan Komplain</h2>
-                <ol>
-                    <li><i class="fas fa-exclamation-circle"></i> Jika mengalami masalah seperti koneksi lambat atau gangguan jaringan, hubungi kami melalui WhatsApp di <a href="#" onclick="redirectToContactWhatsApp()">0857 7777 3541</a>.</li>
-                    <li><i class="fas fa-comment-alt"></i> Jelaskan masalah secara singkat dan sertakan nama serta alamat Anda.</li>
-                    <li><i class="fas fa-clock"></i> Tim kami akan merespons dalam waktu maksimal 2 jam pada jam kerja (08.00-17.00 WIB).</li>
-                    <li><i class="fas fa-tools"></i> Jika diperlukan, teknisi akan dijadwalkan untuk perbaikan gratis di lokasi Anda.</li>
-                    <li><i class="fas fa-check-circle"></i> Kami akan memastikan masalah terselesaikan dan koneksi kembali optimal.</li>
-                </ol>
-                <a href="#" class="btn" onclick="redirectToContactWhatsApp()">Ajukan Komplain</a>
+                <ul class="guide-list">
+                    <li class="guide-item">
+                        <i class="fas fa-exclamation-circle guide-icon"></i>
+                        <span class="guide-text">Jika mengalami masalah seperti koneksi lambat atau gangguan jaringan, hubungi kami melalui WhatsApp di <a href="#" onclick="redirectToContactWhatsApp('complain')">0857 7777 3541</a>.</span>
+                    </li>
+                    <li class="guide-item">
+                        <i class="fas fa-comment-alt guide-icon"></i>
+                        <span class="guide-text">Jelaskan masalah secara singkat dan sertakan nama serta alamat Anda.</span>
+                    </li>
+                    <li class="guide-item">
+                        <i class="fas fa-clock guide-icon"></i>
+                        <span class="guide-text">Tim kami akan merespons dalam waktu maksimal 2 jam pada jam kerja (08.00-17.00 WIB).</span>
+                    </li>
+                    <li class="guide-item">
+                        <i class="fas fa-tools guide-icon"></i>
+                        <span class="guide-text">Jika diperlukan, teknisi akan dijadwalkan untuk perbaikan gratis di lokasi Anda.</span>
+                    </li>
+                    <li class="guide-item">
+                        <i class="fas fa-check-circle guide-icon"></i>
+                        <span class="guide-text">Kami akan memastikan masalah terselesaikan dan koneksi kembali optimal.</span>
+                    </li>
+                </ul>
+                <a href="#" class="btn" onclick="redirectToContactWhatsApp('complain')">Ajukan Komplain</a>
             </div>
         </section>
     </div>
-    <div class="whatsapp-float" onclick="redirectToContactWhatsApp()">
+    <div class="whatsapp-float" onclick="redirectToContactWhatsApp('general')">
         <img src="https://github.com/ridwanbudilaksono/wifi/blob/main/whatsapp.png?raw=true" alt="WhatsApp">
     </div>
     <footer>
@@ -325,20 +427,33 @@
             document.querySelector('.whatsapp-float').classList.add('show');
         }
 
-        // Redirect to WhatsApp for contact section and floating button
-        function redirectToContactWhatsApp() {
-            const message = encodeURIComponent(`Saya ingin informasi lebih lanjut tentang layanan Pusat WiFi Solo`);
+        // Redirect to WhatsApp based on button type
+        function redirectToContactWhatsApp(type) {
+            let message;
+            switch(type) {
+                case 'register':
+                    message = encodeURIComponent(`Saya ingin informasi lebih lanjut tentang pendaftaran di Pusat WiFi Solo`);
+                    break;
+                case 'install':
+                    message = encodeURIComponent(`Saya ingin informasi lebih lanjut tentang jadwal pemasangan dari Pusat WiFi Solo`);
+                    break;
+                case 'complain':
+                    message = encodeURIComponent(`Saya ingin mengajukan komplain seputar internet di Pusat WiFi Solo`);
+                    break;
+                default:
+                    message = encodeURIComponent(`Saya ingin informasi lebih lanjut tentang layanan Pusat WiFi Solo`);
+            }
             const whatsappUrl = `https://wa.me/6285777773541?text=${message}`;
             window.open(whatsappUrl, '_blank');
         }
 
-        // Card animation on scroll
+        // Card animation on scroll for all cards
         const cards = document.querySelectorAll('.guide-card');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0) rotate(0)';
+                    entry.target.style.transform = 'translateY(0)';
                     entry.target.style.transitionDelay = `${index * 0.15}s`;
                 }
             });
@@ -346,23 +461,13 @@
 
         cards.forEach(card => {
             card.style.opacity = '0';
-            card.style.transform = 'translateY(80px) rotate(-3deg)';
+            card.style.transform = 'translateY(80px)';
             card.style.transition = 'opacity 0.7s, transform 0.7s';
             observer.observe(card);
         });
 
         // Dynamic year in footer
         document.querySelector('footer p').textContent = `2025 Pusat WiFi Solo\nInternet Lancar dan Stabil`;
-
-        // Add rotateIn animation to cards on click
-        cards.forEach(card => {
-            card.addEventListener('click', () => {
-                card.style.animation = 'rotateIn 0.6s ease-out';
-                setTimeout(() => {
-                    card.style.animation = '';
-                }, 600);
-            });
-        });
     </script>
 </body>
 </html>
