@@ -410,7 +410,7 @@
                 <ul class="guide-list">
                     <li class="guide-item">
                         <i class="fas fa-user-plus guide-icon"></i>
-                        <span class="guide-text">Hubungi kami melalui WhatsApp di <a href="#" onclick="redirectToContactWhatsApp('register')">0857 7777 3541</a> atau klik tombol WhatsApp di pojok kiri bawah.</span>
+                        <span class="guide-text">Hubungi kami melalui WhatsApp di <a href="javascript:void(0)" onclick="redirectToContactWhatsApp('register')">0857 7777 3541</a> atau klik tombol WhatsApp di pojok kiri bawah.</span>
                     </li>
                     <li class="guide-item">
                         <i class="fas fa-list guide-icon"></i>
@@ -429,7 +429,7 @@
                         <span class="guide-text">Lakukan pembayaran awal sesuai paket yang dipilih melalui metode pembayaran yang tersedia.</span>
                     </li>
                 </ul>
-                <a href="#" class="btn" onclick="redirectToContactWhatsApp('register')">Daftar Sekarang</a>
+                <a href="javascript:void(0)" class="btn" onclick="redirectToContactWhatsApp('register')">Daftar Sekarang</a>
             </div>
             <div class="guide-card">
                 <h2>Proses Instalasi</h2>
@@ -455,14 +455,14 @@
                         <span class="guide-text">Anda akan menerima panduan penggunaan dan informasi login WiFi.</span>
                     </li>
                 </ul>
-                <a href="#" class="btn" onclick="redirectToContactWhatsApp('install')">Tanya Tentang Instalasi</a>
+                <a href="javascript:void(0)" class="btn" onclick="redirectToContactWhatsApp('install')">Tanya Tentang Instalasi</a>
             </div>
             <div class="guide-card">
                 <h2>Panduan Komplain</h2>
                 <ul class="guide-list">
                     <li class="guide-item">
                         <i class="fas fa-exclamation-circle guide-icon"></i>
-                        <span class="guide-text">Jika mengalami masalah seperti koneksi lambat atau gangguan jaringan, hubungi kami melalui WhatsApp di <a href="#" onclick="redirectToContactWhatsApp('complain')">0857 7777 3541</a>.</span>
+                        <span class="guide-text">Jika mengalami masalah seperti koneksi lambat atau gangguan jaringan, hubungi kami melalui WhatsApp di <a href="javascript:void(0)" onclick="redirectToContactWhatsApp('complain')">0857 7777 3541</a>.</span>
                     </li>
                     <li class="guide-item">
                         <i class="fas fa-comment-alt guide-icon"></i>
@@ -481,7 +481,7 @@
                         <span class="guide-text">Kami akan memastikan masalah terselesaikan dan koneksi kembali optimal.</span>
                     </li>
                 </ul>
-                <a href="#" class="btn" onclick="redirectToContactWhatsApp('complain')">Ajukan Komplain</a>
+                <a href="javascript:void(0)" class="btn" onclick="redirectToContactWhatsApp('complain')">Ajukan Komplain</a>
             </div>
         </section>
         <section class="links-section">
@@ -522,7 +522,11 @@
             const whatsappFloat = document.querySelector('.whatsapp-float');
 
             linkButtons.forEach(button => {
-                button.addEventListener('click', () => {
+                button.addEventListener('click', (e) => {
+                    // Only prevent default for buttons with href="#"
+                    if (button.getAttribute('href') === '#') {
+                        e.preventDefault();
+                    }
                     button.classList.add('clicked');
                     setTimeout(() => {
                         button.classList.remove('clicked');
@@ -531,7 +535,8 @@
             });
 
             otherButtons.forEach(button => {
-                button.addEventListener('click', () => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault(); // Prevent default to avoid scrolling
                     button.classList.add('clicked');
                     setTimeout(() => {
                         button.classList.remove('clicked');
