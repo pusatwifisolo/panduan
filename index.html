@@ -145,16 +145,20 @@
             border-radius: 50px;
             margin-top: 1.2em;
             font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            transition: opacity 0.3s ease-out, transform 0.3s ease-in-out;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             text-align: center;
-            width: 230px; /* Default width for other cards */
+            width: 230px;
             box-sizing: border-box;
+            outline: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
         .btn:hover {
-            transform: scale(1.15);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-            background: linear-gradient(45deg, #3b82f6, #1e3a8a);
+            animation: pulse 0.8s infinite ease-in-out;
+        }
+        .btn.clicked {
+            animation: jumpOut 0.3s ease-in-out forwards;
         }
         .links-section {
             max-width: 1200px;
@@ -167,29 +171,44 @@
             flex-wrap: nowrap;
             gap: 0.5em;
         }
-        .links-container .btn {
-            width: 194px; /* Reduced by 2% from 198px */
+        .links-container a {
+            width: 194px;
+            display: inline-block;
             padding: 12px 0;
-            transition: none;
+            background: linear-gradient(45deg, #1e3a8a, #3b82f6);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: opacity 0.3s ease-out, transform 0.3s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            white-space: nowrap;
+            text-align: center;
             outline: none;
             user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            animation: bounceIn 0.6s ease-out forwards;
         }
-        .links-container .btn:hover {
-            transform: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            background: linear-gradient(45deg, #1e3a8a, #3b82f6);
+        .links-container a:hover {
+            animation: pulse 0.8s infinite ease-in-out;
+        }
+        .links-container a.clicked {
+            animation: fadeOut 0.3s ease-out forwards;
         }
         .links-container .payment-btn {
             margin-right: auto;
             margin-left: 0;
+            animation-delay: 0.1s;
         }
         .links-container .home-btn {
             margin-left: auto;
             margin-right: auto;
+            animation-delay: 0.2s;
         }
         .links-container .guide-btn {
             margin-left: auto;
             margin-right: 0;
+            animation-delay: 0.3s;
         }
         .whatsapp-float {
             position: fixed;
@@ -204,10 +223,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: opacity 0.3s ease-out, transform 0.3s ease-in-out;
             cursor: pointer;
             opacity: 0;
-            transform: translateY(50px);
+            outline: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
         .whatsapp-float img {
             width: 40px;
@@ -215,11 +236,10 @@
             object-fit: contain;
         }
         .whatsapp-float.show {
-            animation: floatIn 1s ease-out 0.8s forwards;
+            animation: bounceIn 0.6s ease-out forwards;
         }
-        .whatsapp-float:hover {
-            transform: scale(1.15);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        .whatsapp-float.clicked {
+            animation: jumpOut 0.3s ease-in-out forwards;
         }
         footer {
             background: linear-gradient(45deg, #1e3a8a, #3b82f6);
@@ -245,16 +265,31 @@
             to { opacity: 1; transform: translateX(0); }
         }
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes floatIn {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes slideUp {
             from { opacity: 0; transform: translateY(80px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: translateY(20px) scale(0.9); }
+            60% { opacity: 1; transform: translateY(-10px) scale(1.05); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.07); }
+            100% { transform: scale(1); }
+        }
+        @keyframes jumpOut {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.07); }
+            100% { opacity: 1; transform: scale(1); }
         }
         @keyframes subtlePulse {
             0% { opacity: 0.4; }
@@ -291,19 +326,12 @@
             .btn { 
                 padding: 10px 20px; 
                 font-size: 0.9em; 
-                width: 210px; /* Default for other cards */
+                width: 210px;
             }
-            .links-container .btn {
-                width: 155px; /* Reduced by 2% from 158.4px */
+            .links-container a {
+                width: 155px;
                 padding: 10px 0;
-                transition: none;
-                outline: none;
-                user-select: none;
-            }
-            .links-container .btn:hover {
-                transform: none;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-                background: linear-gradient(45deg, #1e3a8a, #3b82f6);
+                font-size: 0.9em;
             }
             .whatsapp-float {
                 width: 51px;
@@ -343,19 +371,12 @@
             .btn { 
                 padding: 8px 15px; 
                 font-size: 0.8em; 
-                width: 190px; /* Default for other cards */
+                width: 190px;
             }
-            .links-container .btn {
-                width: 129px; /* Reduced by 2% from 132px */
+            .links-container a {
+                width: 129px;
                 padding: 8px 0;
-                transition: none;
-                outline: none;
-                user-select: none;
-            }
-            .links-container .btn:hover {
-                transform: none;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-                background: linear-gradient(45deg, #1e3a8a, #3b82f6);
+                font-size: 0.8em;
             }
             .whatsapp-float {
                 width: 46px;
@@ -478,19 +499,52 @@
         <p>2025 Pusat WiFi Solo\nInternet Lancar dan Stabil</p>
     </footer>
     <script>
-        // Scroll to top and initialize animations on page load
+        // Initialize animations on page load
         window.onload = function() {
             window.scrollTo(0, 0);
             triggerHeaderAnimations();
+            initWhatsAppFloatAnimation();
+            addButtonClickAnimation();
         };
 
-        // Function to trigger header and WhatsApp float animations
+        // Function to trigger header animations
         function triggerHeaderAnimations() {
             document.querySelector('.part1').classList.add('animated');
             document.querySelector('.part2').classList.add('animated');
             document.querySelector('header p').classList.add('animated');
             document.querySelector('.slogan').classList.add('animated');
-            document.querySelector('.whatsapp-float').classList.add('show');
+        }
+
+        // Add click animation to buttons and WhatsApp float
+        function addButtonClickAnimation() {
+            const linkButtons = document.querySelectorAll('.links-container a');
+            const otherButtons = document.querySelectorAll('.btn:not(.link-btn)');
+            const whatsappFloat = document.querySelector('.whatsapp-float');
+
+            linkButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    button.classList.add('clicked');
+                    setTimeout(() => {
+                        button.classList.remove('clicked');
+                    }, 300); // Match fadeOut animation duration
+                });
+            });
+
+            otherButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    button.classList.add('clicked');
+                    setTimeout(() => {
+                        button.classList.remove('clicked');
+                    }, 300); // Match jumpOut animation duration
+                });
+            });
+
+            whatsappFloat.addEventListener('click', () => {
+                whatsappFloat.classList.add('clicked');
+                setTimeout(() => {
+                    whatsappFloat.classList.remove('clicked');
+                }, 300); // Match jumpOut animation duration
+            });
         }
 
         // Redirect to WhatsApp based on button type
@@ -510,7 +564,28 @@
                     message = encodeURIComponent(`Saya ingin informasi lebih lanjut tentang layanan Pusat WiFi Solo`);
             }
             const whatsappUrl = `https://wa.me/6285777773541?text=${message}`;
-            window.open(whatsappUrl, '_blank');
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 300); // Delay to allow animations
+        }
+
+        // WhatsApp float animation
+        function initWhatsAppFloatAnimation() {
+            const whatsappFloat = document.querySelector('.whatsapp-float');
+            const whatsappIcon = whatsappFloat.querySelector('img');
+
+            function showWhatsAppFloat() {
+                whatsappFloat.classList.add('show');
+            }
+
+            if (whatsappIcon.complete) {
+                showWhatsAppFloat();
+            } else {
+                whatsappIcon.addEventListener('load', showWhatsAppFloat);
+                whatsappIcon.addEventListener('error', showWhatsAppFloat);
+            }
+
+            setTimeout(showWhatsAppFloat, 5000);
         }
 
         // Animation on scroll for cards only
