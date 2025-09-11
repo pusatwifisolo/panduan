@@ -148,13 +148,26 @@
             transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             text-align: center;
-            width: 230px; /* Set width to match "Tanya Tentang Instalasi" */
+            width: 230px; /* Default width for other cards */
             box-sizing: border-box;
         }
         .btn:hover {
             transform: scale(1.15);
             box-shadow: 0 6px 20px rgba(0,0,0,0.3);
             background: linear-gradient(45deg, #3b82f6, #1e3a8a);
+        }
+        .links-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: nowrap;
+            gap: 1em;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 0.5em; /* Reduced margin-bottom to reduce empty space */
+        }
+        .links-container .btn {
+            width: 173px; /* 75% of 230px */
         }
         .whatsapp-float {
             position: fixed;
@@ -256,7 +269,15 @@
             .btn { 
                 padding: 10px 20px; 
                 font-size: 0.9em; 
-                width: 210px; /* Adjusted for mobile */
+                width: 210px; /* Default for other cards */
+            }
+            .links-container {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 0.5em; /* Reduced margin-bottom */
+            }
+            .links-container .btn {
+                width: 158px; /* 75% of 210px */
             }
             .whatsapp-float {
                 width: 51px;
@@ -296,7 +317,13 @@
             .btn { 
                 padding: 8px 15px; 
                 font-size: 0.8em; 
-                width: 190px; /* Adjusted for smaller mobile */
+                width: 190px; /* Default for other cards */
+            }
+            .links-container .btn {
+                width: 143px; /* 75% of 190px */
+            }
+            .links-container {
+                margin-bottom: 0.5em; /* Reduced margin-bottom */
             }
             .whatsapp-float {
                 width: 46px;
@@ -403,6 +430,11 @@
                 </ul>
                 <a href="#" class="btn" onclick="redirectToContactWhatsApp('complain')">Ajukan Komplain</a>
             </div>
+            <div class="links-container">
+                <a href="https://ridwanbudilaksono.github.io/galeri/" class="btn link-btn">Galeri</a>
+                <a href="https://ridwanbudilaksono.github.io/wifi/" class="btn link-btn">Halaman Utama</a>
+                <a href="https://ridwanbudilaksono.github.io/pembayaran/" class="btn link-btn">Pembayaran</a>
+            </div>
         </section>
     </div>
     <div class="whatsapp-float" onclick="redirectToContactWhatsApp('general')">
@@ -447,8 +479,9 @@
             window.open(whatsappUrl, '_blank');
         }
 
-        // Card animation on scroll for all cards
+        // Animation on scroll for cards and link buttons
         const cards = document.querySelectorAll('.guide-card');
+        const linkButtons = document.querySelectorAll('.link-btn');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
@@ -464,6 +497,13 @@
             card.style.transform = 'translateY(80px)';
             card.style.transition = 'opacity 0.7s, transform 0.7s';
             observer.observe(card);
+        });
+
+        linkButtons.forEach(button => {
+            button.style.opacity = '0';
+            button.style.transform = 'translateY(80px)';
+            button.style.transition = 'opacity 0.7s, transform 0.7s';
+            observer.observe(button);
         });
 
         // Dynamic year in footer
