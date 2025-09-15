@@ -2,555 +2,421 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panduan - Pusat WiFi Solo</title>
-    <link rel="icon" type="image/png" href="https://github.com/pusatwifisolo/wifi/blob/main/favicon.png?raw=true">
+    <link rel="icon" type="image/png" href="https://github.com/pusatwifisolo/wifi/blob/main/logopwslow.png?raw=true">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-        body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #6b7280, #1e3a8a);
-            color: #333;
-            overflow-x: hidden;
-            width: 100%;
-            min-height: 100vh;
-            position: relative;
         }
-        header {
-            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-            color: white;
-            text-align: center;
-            padding: 1.19em 1em;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-        }
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"%3E%3Cfilter id="bb"%3E%3CfeGaussianBlur in="SourceGraphic" stdDeviation="20" /%3E%3C/filter%3E%3Cpath fill="%23ffffff22" d="M400 0C179.1 0 0 179.1 0 400s179.1 400 400 400 400-179.1 400-400S620.9 0 400 0zm0 720c-176.7 0-320-143.3-320-320s143.3-320 320-320 320 143.3 320 320-143.3 320-320 320z"/%3E%3Ccircle fill="%23ffffff44" cx="400" cy="400" r="300" filter="url(%23bb)"/%3E%3C/svg%3E');
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
-            opacity: 0.4;
-            animation: subtlePulse 5s infinite ease-in-out;
+            background-position: center;
+            height: 100vh;
+            color: white;
         }
-        header h1 {
-            font-size: 2.8em;
-            margin-bottom: 0.4em;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #1e3a8a, #3b82f6);
+            padding: 12px 30px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            text-align: center;
         }
-        header p {
-            font-size: 1.4em;
-            margin-bottom: 0.6em;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #3b82f6, #1e3a8a);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
-        header .slogan {
-            font-size: 1.2em;
-            font-style: italic;
-        }
-        header .part1, header .part2, header p, header .slogan {
-            opacity: 0;
-        }
-        header .part1.animated {
-            animation: slideInLeft 1s ease-out forwards;
-        }
-        header .part2.animated {
-            animation: slideInLeft 1s ease-out 0.8s forwards;
-        }
-        header p.animated {
-            animation: slideInRight 1s ease-out 1.7s forwards;
-        }
-        header .slogan.animated {
-            animation: slideInRight 1s ease-out 1.7s forwards;
-        }
-        .container {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 3em 1em;
-            overflow: hidden;
-        }
-        .guide-section {
-            margin: 2em 0;
-        }
-        .guide-card {
-            background: white;
+        
+        .card, .feature-card {
+            transition: transform 0.3s ease;
             border-radius: 15px;
-            box-shadow: 0 6px 25px rgba(0,0,0,0.15);
-            padding: 1.5em;
-            text-align: left;
+            overflow: hidden;
             width: 100%;
             max-width: 800px;
-            margin: 0 auto 1.5em;
-            transition: transform 0.4s, box-shadow 0.4s;
-            border: 3px solid #3b82f6;
-        }
-        .guide-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-        }
-        .guide-card h2 {
-            color: #1e3a8a;
-            font-size: 1.8em;
-            margin-bottom: 0.8em;
-            text-align: center;
-        }
-        .guide-list {
-            padding-left: 0;
-            list-style: none;
-            font-size: 1em;
-            line-height: 1.6;
-        }
-        .guide-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 0.8em;
-            position: relative;
-            padding-left: 2em;
-        }
-        .guide-icon {
-            margin-right: 0.8em;
-            color: #3b82f6;
-            font-size: 1.1em;
-            width: 1.2em;
-            flex-shrink: 0;
-            margin-top: 0.1em;
-        }
-        .guide-text {
-            flex: 1;
-            line-height: 1.5;
-        }
-        .guide-text a {
-            color: #3b82f6;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .guide-text a:hover {
-            color: #1e3a8a;
-        }
-        .btn {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(45deg, #1e3a8a, #3b82f6);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            margin-top: 1.2em;
-            font-weight: bold;
-            transition: opacity 0.3s ease-out, transform 0.3s ease-in-out;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            text-align: center;
-            width: 230px;
-            box-sizing: border-box;
-            outline: none;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .btn:hover {
-            animation: pulse 0.8s infinite ease-in-out;
-        }
-        .btn.clicked {
-            animation: jumpOut 0.3s ease-in-out forwards;
-        }
-        .links-section {
-            max-width: 1200px;
             margin: 0 auto;
-            padding: 1em 0;
-        }
-        .links-container {
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
-            flex-wrap: nowrap;
-            gap: 0.5em;
         }
-        .links-container a {
-            width: 194px;
-            display: inline-block;
-            padding: 12px 0;
-            background: linear-gradient(45deg, #1e3a8a, #3b82f6);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: opacity 0.3s ease-out, transform 0.3s ease-in-out;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            white-space: nowrap;
-            text-align: center;
-            outline: none;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-            animation: bounceIn 0.6s ease-out forwards;
+        
+        .card:hover, .feature-card:hover {
+            transform: translateY(-10px);
         }
-        .links-container a:hover {
-            animation: pulse 0.8s infinite ease-in-out;
-        }
-        .links-container a.clicked {
-            animation: fadeOut 0.3s ease-out forwards;
-        }
-        .links-container .payment-btn {
-            margin-right: auto;
-            margin-left: 0;
-            animation-delay: 0.1s;
-        }
-        .links-container .home-btn {
-            margin-left: auto;
-            margin-right: auto;
-            animation-delay: 0.2s;
-        }
-        .links-container .guide-btn {
-            margin-left: auto;
-            margin-right: 0;
-            animation-delay: 0.3s;
-        }
-        .whatsapp-float {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            z-index: 1000;
-            width: 61px;
-            height: 61px;
-            background: linear-gradient(45deg, #25D366, #128C7E);
-            border-radius: 50%;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.3s ease-out, transform 0.3s ease-in-out;
-            cursor: pointer;
-            opacity: 0;
-            outline: none;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .whatsapp-float img {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-        }
-        .whatsapp-float.show {
-            animation: bounceIn 0.6s ease-out forwards;
-        }
-        .whatsapp-float.clicked {
-            animation: jumpOut 0.3s ease-in-out forwards;
-        }
-        footer {
-            background: linear-gradient(45deg, #1e3a8a, #3b82f6);
-            color: white;
-            text-align: center;
-            padding: 0.3em;
+        
+        .section-title {
             position: relative;
-            width: 100%;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+            display: inline-block;
+            padding-bottom: 10px;
         }
-        footer p {
-            animation: fadeIn 2s ease-in;
-            font-size: 0.8em;
-            white-space: pre-line;
-            line-height: 1.3;
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: #3b82f6;
+            bottom: 0;
+            left: 0;
         }
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-100px); }
-            to { opacity: 1; transform: translateX(0); }
+
+        .no-highlight {
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
         }
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(100px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(80px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes fadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; }
-        }
-        @keyframes bounceIn {
-            0% { opacity: 0; transform: translateY(20px) scale(0.9); }
-            60% { opacity: 1; transform: translateY(-10px) scale(1.05); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.07); }
-            100% { transform: scale(1); }
-        }
-        @keyframes jumpOut {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.07); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-        @keyframes subtlePulse {
-            0% { opacity: 0.4; }
-            50% { opacity: 0.6; }
-            100% { opacity: 0.4; }
-        }
-        @media (max-width: 768px) {
-            header { padding: 0.8925em 1em; }
-            header h1 { font-size: 2em; }
-            header p { font-size: 1.2em; }
-            header .slogan { font-size: 1em; }
-            .container { padding: 2em 0.5em; }
-            .guide-card {
-                padding: 1.2em;
-                max-width: 100%;
-            }
-            .guide-card h2 { font-size: 1.5em; }
-            .guide-item {
+
+        @media (max-width: 767px) {
+            .guide-section {
                 display: flex;
-                align-items: flex-start;
-                padding-left: 1.5em;
-                margin-bottom: 0.8em;
-            }
-            .guide-icon {
-                margin-right: 0.6em;
-                margin-bottom: 0;
-                width: 1.2em;
-                font-size: 1em;
-            }
-            .guide-text {
-                margin-top: 0;
-                line-height: 1.4;
-            }
-            .btn { 
-                padding: 10px 20px; 
-                font-size: 0.9em; 
-                width: 210px;
-            }
-            .links-container a {
-                width: 155px;
-                padding: 10px 0;
-                font-size: 0.9em;
-            }
-            .whatsapp-float {
-                width: 51px;
-                height: 51px;
-                bottom: 10px;
-                left: 10px;
-            }
-            .whatsapp-float img {
-                width: 34px;
-                height: 34px;
-            }
-            footer { padding: 0.25em; }
-            footer p { font-size: 0.7em; }
-        }
-        @media (max-width: 480px) {
-            header { padding: 0.595em 0.5em; }
-            header h1 { font-size: 1.6em; }
-            header p { font-size: 1em; }
-            header .slogan { font-size: 0.9em; }
-            .guide-card {
-                padding: 1em;
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
                 max-width: 100%;
+                margin-bottom: 1.5rem;
             }
-            .guide-card h2 { font-size: 1.3em; }
-            .guide-item {
-                padding-left: 1.2em;
+            .guide-card {
+                flex: 1;
+                min-width: 0;
+                max-width: 100%;
+                padding: 1rem 1rem 1.5rem 1rem;
+                font-size: 0.9rem;
+                min-height: 300px;
             }
-            .guide-icon {
-                margin-right: 0.5em;
-                font-size: 0.95em;
-                width: 1.1em;
+            .guide-card h2 {
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
             }
-            .guide-text {
-                font-size: 0.9em;
-                line-height: 1.3;
+            .guide-card ul {
+                font-size: 0.8rem;
+                min-height: 120px;
+                flex-grow: 1;
             }
-            .btn { 
-                padding: 8px 15px; 
-                font-size: 0.8em; 
-                width: 190px;
+            .guide-card a {
+                padding: 8px 15px;
+                font-size: 0.8rem;
+                margin-top: 1.5rem;
             }
-            .links-container a {
-                width: 129px;
-                padding: 8px 0;
-                font-size: 0.8em;
+            .guide-card i {
+                font-size: 1.5rem;
             }
-            .whatsapp-float {
-                width: 46px;
-                height: 46px;
-                bottom: 10px;
-                left: 10px;
+        }
+        
+        @media (max-width: 480px) {
+            .guide-card {
+                padding: 0.8rem 0.8rem 1.2rem 0.8rem;
+                min-height: 280px;
             }
-            .whatsapp-float img {
-                width: 30px;
-                height: 30px;
+            .guide-card h2 {
+                font-size: 1rem;
+                margin-bottom: 0.75rem;
             }
-            footer { padding: 0.2em; }
-            footer p { font-size: 0.65em; }
+            .guide-card ul {
+                font-size: 0.7rem;
+                min-height: 100px;
+            }
+            .guide-card a {
+                padding: 6px 12px;
+                font-size: 0.7rem;
+                margin-top: 1rem;
+            }
+            .guide-card i {
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .guide-section {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 2rem;
+            }
+            .guide-card h2 {
+                margin-bottom: 1rem;
+            }
+            .guide-card ul {
+                min-height: 140px;
+                flex-grow: 1;
+            }
+            .guide-card a {
+                margin-top: 1.5rem;
+            }
+            .guide-card {
+                min-height: 320px;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>
-            <span class="part1">Panduan Layanan</span>
-            <br>
-            <span class="part2">Pusat WiFi Solo</span>
-        </h1>
-        <p>Pendaftaran, Instalasi, dan Komplain</p>
-        <p class="slogan">Proses Mudah, Cepat, dan Profesional</p>
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-md fixed w-full z-50">
+        <div class="container mx-auto max-w-1200px px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://github.com/pusatwifisolo/wifi/blob/main/logopwslow.png?raw=true" alt="Logo" class="w-12 h-12 mr-3">
+                <span class="text-2xl font-bold text-gray-800">Pusat WiFi <span class="text-blue-600">Solo</span></span>
+            </div>
+            
+            <nav class="hidden md:flex space-x-10">
+                <a href="https://pusatwifisolo.github.io/wifi/#home" class="text-gray-600 hover:text-blue-600 font-medium no-highlight">Beranda</a>
+                <a href="https://pusatwifisolo.github.io/wifi/#about" class="text-gray-600 hover:text-blue-600 font-medium no-highlight">Tentang</a>
+                <a href="https://pusatwifisolo.github.io/wifi/#services" class="text-gray-600 hover:text-blue-600 font-medium no-highlight">Layanan</a>
+                <a href="https://pusatwifisolo.github.io/wifi/#pricing" class="text-gray-600 hover:text-blue-600 font-medium no-highlight">Harga</a>
+                <a href="https://pusatwifisolo.github.io/wifi/#contact" class="text-gray-600 hover:text-blue-600 font-medium no-highlight">Kontak</a>
+            </nav>
+            
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-gray-600 no-highlight">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-4">
+            <a href="https://pusatwifisolo.github.io/wifi/#home" class="block py-2 text-gray-600 hover:text-blue-600 no-highlight">Beranda</a>
+            <a href="https://pusatwifisolo.github.io/wifi/#about" class="block py-2 text-gray-600 hover:text-blue-600 no-highlight">Tentang</a>
+            <a href="https://pusatwifisolo.github.io/wifi/#services" class="block py-2 text-gray-600 hover:text-blue-600 no-highlight">Layanan</a>
+            <a href="https://pusatwifisolo.github.io/wifi/#pricing" class="block py-2 text-gray-600 hover:text-blue-600 no-highlight">Harga</a>
+            <a href="https://pusatwifisolo.github.io/wifi/#contact" class="block py-2 text-gray-600 hover:text-blue-600 no-highlight">Kontak</a>
+        </div>
     </header>
-    <div class="container">
-        <section class="guide-section">
-            <div class="guide-card" id="register-card">
-                <h2>Proses Pendaftaran</h2>
-                <ul class="guide-list">
-                    <li class="guide-item">
-                        <i class="fas fa-user-plus guide-icon"></i>
-                        <span class="guide-text">Hubungi kami melalui WhatsApp di <a href="javascript:void(0)" onclick="redirectToContactWhatsApp('register')">0857 7777 3541</a> atau klik tombol WhatsApp di pojok kiri bawah.</span>
-                    </li>
-                    <li class="guide-item">
-                        <i class="fas fa-list guide-icon"></i>
-                        <span class="guide-text">Pilih paket yang sesuai dengan kebutuhan Anda (Basic, Standard, Premium, atau Platinum).</span>
-                    </li>
-                    <li class="guide-item">
-                        <i class="fas fa-file-alt guide-icon"></i>
-                        <span class="guide-text">Kirimkan data diri berupa nama, alamat lengkap, dan nomor telepon.</span>
-                    </li>
-                    <li class="guide-item">
-                        <i class="fas fa-check-circle guide-icon"></i>
-                        <span class="guide-text">Tim kami akan mengkonfirmasi pendaftaran dan menjadwalkan survey lokasi.</span>
-                    </li>
-                    <li class="guide-item">
-                        <i class="fas fa-money-check-alt guide-icon"></i>
-                        <span class="guide-text">Lakukan pembayaran awal sesuai paket yang dipilih melalui metode pembayaran yang tersedia.</span>
-                    </li>
-                </ul>
-                <a href="javascript:void(0)" class="btn" onclick="redirectToContactWhatsApp('register')">Daftar Sekarang</a>
+
+    <!-- Hero Section with Background -->
+    <section id="guide" class="hero flex items-center pt-24">
+        <div class="container mx-auto max-w-1200px px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Panduan Layanan<br>Pusat WiFi Solo</h1>
+            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">Pendaftaran, Instalasi, dan Komplain</p>
+            <p class="text-lg max-w-3xl mx-auto mb-16 italic">Proses Mudah, Cepat, dan Profesional</p>
+        </div>
+    </section>
+
+    <!-- Guide Cards Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto max-w-1200px px-4">
+            <div class="guide-section">
+                <div class="feature-card bg-white p-4 md:p-6 rounded-xl shadow-md card">
+                    <h2 class="text-lg md:text-2xl font-bold text-center mb-4">Proses Pendaftaran</h2>
+                    <ul class="space-y-3 text-sm md:text-base">
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-user-plus text-blue-600"></i>
+                            </div>
+                            <span>Hubungi kami melalui WhatsApp di <a href="javascript:void(0)" class="text-blue-600 hover:text-blue-800 no-highlight" onclick="redirectToContactWhatsApp('register')">0857 7777 3541</a> atau klik tombol di bawah.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-list text-blue-600"></i>
+                            </div>
+                            <span>Pilih paket yang sesuai dengan kebutuhan Anda (Basic, Standard, Premium, atau Platinum).</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-file-alt text-blue-600"></i>
+                            </div>
+                            <span>Kirimkan data diri berupa nama, alamat lengkap, dan nomor telepon.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-check-circle text-blue-600"></i>
+                            </div>
+                            <span>Tim kami akan mengkonfirmasi pendaftaran dan menjadwalkan survey lokasi.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-money-check-alt text-blue-600"></i>
+                            </div>
+                            <span>Lakukan pembayaran awal sesuai paket yang dipilih melalui metode pembayaran yang tersedia.</span>
+                        </li>
+                    </ul>
+                    <a href="javascript:void(0)" class="btn-primary text-white font-medium inline-block no-highlight mt-6" onclick="redirectToContactWhatsApp('register')">Daftar Sekarang</a>
+                </div>
+                
+                <div class="feature-card bg-white p-4 md:p-6 rounded-xl shadow-md card">
+                    <h2 class="text-lg md:text-2xl font-bold text-center mb-4">Proses Instalasi</h2>
+                    <ul class="space-y-3 text-sm md:text-base">
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-blue-600"></i>
+                            </div>
+                            <span>Tim teknisi kami akan melakukan survey lokasi untuk memastikan kelayakan jaringan.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-tools text-blue-600"></i>
+                            </div>
+                            <span>Setelah survey disetujui, instalasi akan dijadwalkan dalam waktu 1-3 hari kerja.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-wifi text-blue-600"></i>
+                            </div>
+                            <span>Teknisi akan memasang perangkat WiFi dan mengatur koneksi internet di lokasi Anda.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-cog text-blue-600"></i>
+                            </div>
+                            <span>Pengujian koneksi dilakukan untuk memastikan kecepatan dan stabilitas sesuai paket.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-thumbs-up text-blue-600"></i>
+                            </div>
+                            <span>Anda akan menerima panduan penggunaan dan informasi login WiFi.</span>
+                        </li>
+                    </ul>
+                    <a href="javascript:void(0)" class="btn-primary text-white font-medium inline-block no-highlight mt-6" onclick="redirectToContactWhatsApp('install')">Tanya Tentang Instalasi</a>
+                </div>
+                
+                <div class="feature-card bg-white p-4 md:p-6 rounded-xl shadow-md card">
+                    <h2 class="text-lg md:text-2xl font-bold text-center mb-4">Panduan Komplain</h2>
+                    <ul class="space-y-3 text-sm md:text-base">
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-exclamation-circle text-blue-600"></i>
+                            </div>
+                            <span>Jika mengalami masalah seperti koneksi lambat atau gangguan jaringan, hubungi kami melalui WhatsApp di <a href="javascript:void(0)" class="text-blue-600 hover:text-blue-800 no-highlight" onclick="redirectToContactWhatsApp('complain')">0857 7777 3541</a>.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-comment-alt text-blue-600"></i>
+                            </div>
+                            <span>Jelaskan masalah secara singkat dan sertakan nama serta alamat Anda.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-clock text-blue-600"></i>
+                            </div>
+                            <span>Tim kami akan merespons dalam waktu maksimal 2 jam pada jam kerja (08.00-17.00 WIB).</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-tools text-blue-600"></i>
+                            </div>
+                            <span>Jika diperlukan, teknisi akan dijadwalkan untuk perbaikan gratis di lokasi Anda.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-check-circle text-blue-600"></i>
+                            </div>
+                            <span>Kami akan memastikan masalah terselesaikan dan koneksi kembali optimal.</span>
+                        </li>
+                    </ul>
+                    <a href="javascript:void(0)" class="btn-primary text-white font-medium inline-block no-highlight mt-6" onclick="redirectToContactWhatsApp('complain')">Ajukan Komplain</a>
+                </div>
             </div>
-            <div class="guide-card">
-                <h2>Proses Instalasi</h2>
-                <ul class="guide-list">
-                    <li class="guide-item">
-                        <i class="fas fa-map-marker-alt guide-icon"></i>
-                        <span class="guide-text">Tim teknisi kami akan melakukan survey lokasi untuk memastikan kelayakan jaringan.</span>
-                    </li>
-                    <li class="guide-item">
-                        <i class="fas fa-tools guide-icon"></i>
-                        <span class="guide-text">Setelah survey disetujui, instalasi akan dijadwalkan dalam waktu 1-3 hari kerja.</span>
-                    </li>
-                    <li class="guide-item">
-                        <i class="fas fa-wifi guide-icon"></i>
-                        <span class="guide-text">Teknisi akan memasang perangkat WiFi dan mengatur koneksi internet di lokasi Anda.</span>
-                    </li>
-                    <li class="guide-item">
-                        <i class="fas fa-cog guide-icon"></i>
-                        <span class="guide-text">Pengujian koneksi dilakukan untuk memastikan kecepatan dan stabilitas sesuai paket.</span>
-                    </li>
-                    <li class="guide-item">
-                        <i class="fas fa-thumbs-up guide-icon"></i>
-                        <span class="guide-text">Anda akan menerima panduan penggunaan dan informasi login WiFi.</span>
-                    </li>
-                </ul>
-                <a href="javascript:void(0)" class="btn" onclick="redirectToContactWhatsApp('install')">Tanya Tentang Instalasi</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto max-w-1200px px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <img src="https://github.com/pusatwifisolo/wifi/blob/main/logopwslow.png?raw=true" alt="Logo" class="w-10 h-10 mr-3">
+                        <span class="text-2xl font-bold">Pusat WiFi <span class="text-blue-400">Solo</span></span>
+                    </div>
+                    <p class="text-gray-400">Internet Lancar dan Stabil untuk rumah dan bisnis.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Tautan Cepat</h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://pusatwifisolo.github.io/wifi/#home" class="text-gray-400 hover:text-white no-highlight">Beranda</a></li>
+                        <li><a href="https://pusatwifisolo.github.io/wifi/#about" class="text-gray-400 hover:text-white no-highlight">Tentang</a></li>
+                        <li><a href="https://pusatwifisolo.github.io/wifi/#services" class="text-gray-400 hover:text-white no-highlight">Layanan</a></li>
+                        <li><a href="https://pusatwifisolo.github.io/wifi/#pricing" class="text-gray-400 hover:text-white no-highlight">Harga</a></li>
+                        <li><a href="https://pusatwifisolo.github.io/wifi/#contact" class="text-gray-400 hover:text-white no-highlight">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Menu</h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://pusatwifisolo.github.io/wifi/" class="text-gray-400 hover:text-white no-highlight">Halaman Utama</a></li>
+                        <li><a href="https://pusatwifisolo.github.io/panduan/" class="text-gray-400 hover:text-white no-highlight">Panduan Layanan</a></li>
+                        <li><a href="https://pusatwifisolo.github.io/pembayaran/" class="text-gray-400 hover:text-white no-highlight">Pembayaran</a></li>
+                        <li><a href="https://pusatwifisolo.github.io/galeri/" class="text-gray-400 hover:text-white no-highlight">Galeri</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Tetap Terhubung</h3>
+                    <div class="flex space-x-4 mb-6">
+                        <a href="javascript:void(0)" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 no-highlight" onclick="redirectToContactWhatsApp('general')">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="mailto:halopusatwifisolo@gmail.com?subject=Informasi%20Pasang%20WiFi%20Solo" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 no-highlight">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="guide-card">
-                <h2>Panduan Komplain</h2>
-                <ul class="guide-list">
-                    <li class="guide-item">
-                        <i class="fas fa-exclamation-circle guide-icon"></i>
-                        <span class="guide-text">Jika mengalami masalah seperti koneksi lambat atau gangguan jaringan, hubungi kami melalui WhatsApp di <a href="javascript:void(0)" onclick="redirectToContactWhatsApp('complain')">0857 7777 3541</a>.</span>
-                    </li>
-                    <li class="guide-item">
-                        <i class="fas fa-comment-alt guide-icon"></i>
-                        <span class="guide-text">Jelaskan masalah secara singkat dan sertakan nama serta alamat Anda.</span>
-                    </li>
-                    <li class="guide-item">
-                        <i class="fas fa-clock guide-icon"></i>
-                        <span class="guide-text">Tim kami akan merespons dalam waktu maksimal 2 jam pada jam kerja (08.00-17.00 WIB).</span>
-                    </li>
-                    <li class="guide-item">
-                        <i class="fas fa-tools guide-icon"></i>
-                        <span class="guide-text">Jika diperlukan, teknisi akan dijadwalkan untuk perbaikan gratis di lokasi Anda.</span>
-                    </li>
-                    <li class="guide-item">
-                        <i class="fas fa-check-circle guide-icon"></i>
-                        <span class="guide-text">Kami akan memastikan masalah terselesaikan dan koneksi kembali optimal.</span>
-                    </li>
-                </ul>
-                <a href="javascript:void(0)" class="btn" onclick="redirectToContactWhatsApp('complain')">Ajukan Komplain</a>
+            
+            <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-400">
+                <p>&copy; 2025 Pusat WiFi Solo. All rights reserved.</p>
             </div>
-        </section>
-        <section class="links-section">
-            <div class="links-container">
-                <a href="https://pusatwifisolo.github.io/galeri/" class="btn link-btn guide-btn">Galeri</a>
-                <a href="https://pusatwifisolo.github.io/wifi/" class="btn link-btn home-btn">Halaman Utama</a>
-                <a href="https://pusatwifisolo.github.io/pembayaran/" class="btn link-btn payment-btn">Pembayaran</a>
-            </div>
-        </section>
-    </div>
-    <div class="whatsapp-float" onclick="redirectToContactWhatsApp('general')">
-        <img src="https://github.com/pusatwifisolo/wifi/blob/main/whatsapp.png?raw=true" alt="WhatsApp">
-    </div>
-    <footer>
-        <p>2025 Pusat WiFi Solo\nInternet Lancar dan Stabil</p>
+        </div>
     </footer>
+
     <script>
-        // Initialize animations on page load
-        window.onload = function() {
-            window.scrollTo(0, 0);
-            triggerHeaderAnimations();
-            initWhatsAppFloatAnimation();
-            addButtonClickAnimation();
-        };
-
-        // Function to trigger header animations
-        function triggerHeaderAnimations() {
-            document.querySelector('.part1').classList.add('animated');
-            document.querySelector('.part2').classList.add('animated');
-            document.querySelector('header p').classList.add('animated');
-            document.querySelector('.slogan').classList.add('animated');
-        }
-
-        // Add click animation to buttons and WhatsApp float
-        function addButtonClickAnimation() {
-            const linkButtons = document.querySelectorAll('.links-container a');
-            const otherButtons = document.querySelectorAll('.btn:not(.link-btn)');
-            const whatsappFloat = document.querySelector('.whatsapp-float');
-
-            linkButtons.forEach(button => {
-                button.addEventListener('click', (e) => {
-                    // Only prevent default for buttons with href="#"
-                    if (button.getAttribute('href') === '#') {
-                        e.preventDefault();
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('mobile-menu');
+            const toggle = document.getElementById('menu-toggle');
+            
+            if (!menu.contains(event.target) && !toggle.contains(event.target) && !menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
                     }
-                    button.classList.add('clicked');
-                    setTimeout(() => {
-                        button.classList.remove('clicked');
-                    }, 300); // Match fadeOut animation duration
-                });
+                }
             });
-
-            otherButtons.forEach(button => {
-                button.addEventListener('click', (e) => {
-                    e.preventDefault(); // Prevent default to avoid scrolling
-                    button.classList.add('clicked');
-                    setTimeout(() => {
-                        button.classList.remove('clicked');
-                    }, 300); // Match jumpOut animation duration
-                });
-            });
-
-            whatsappFloat.addEventListener('click', () => {
-                whatsappFloat.classList.add('clicked');
-                setTimeout(() => {
-                    whatsappFloat.classList.remove('clicked');
-                }, 300); // Match jumpOut animation duration
-            });
-        }
+        });
 
         // Redirect to WhatsApp based on button type
         function redirectToContactWhatsApp(type) {
@@ -571,30 +437,11 @@
             const whatsappUrl = `https://wa.me/6285777773541?text=${message}`;
             setTimeout(() => {
                 window.open(whatsappUrl, '_blank');
-            }, 300); // Delay to allow animations
+            }, 300);
         }
 
-        // WhatsApp float animation
-        function initWhatsAppFloatAnimation() {
-            const whatsappFloat = document.querySelector('.whatsapp-float');
-            const whatsappIcon = whatsappFloat.querySelector('img');
-
-            function showWhatsAppFloat() {
-                whatsappFloat.classList.add('show');
-            }
-
-            if (whatsappIcon.complete) {
-                showWhatsAppFloat();
-            } else {
-                whatsappIcon.addEventListener('load', showWhatsAppFloat);
-                whatsappIcon.addEventListener('error', showWhatsAppFloat);
-            }
-
-            setTimeout(showWhatsAppFloat, 5000);
-        }
-
-        // Animation on scroll for cards only
-        const cards = document.querySelectorAll('.guide-card');
+        // Card animation on scroll
+        const cards = document.querySelectorAll('.card, .feature-card');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
@@ -611,9 +458,6 @@
             card.style.transition = 'opacity 0.7s, transform 0.7s';
             observer.observe(card);
         });
-
-        // Dynamic year in footer
-        document.querySelector('footer p').textContent = `2025 Pusat WiFi Solo\nInternet Lancar dan Stabil`;
     </script>
 </body>
 </html>
